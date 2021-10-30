@@ -1,5 +1,6 @@
 Run locally:
    - `./runtimes/8.0/bin/install.sh`
+   - `./vendor/bin/sail artisan migrate`
 
 How it works:
   - Every minute sends emails `app/Console/Commands/SendTrackEmail.php`

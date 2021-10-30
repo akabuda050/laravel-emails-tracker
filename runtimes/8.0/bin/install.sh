@@ -13,5 +13,3 @@ docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt laravelsail/php80-
 ./vendor/bin/sail npm run dev
 
 /bin/bash ./runtimes/8.0/bin/init-dummy-certs.sh
-
-./vendor/bin/sail artisan migrate
