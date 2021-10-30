@@ -1,6 +1,6 @@
 Run locally:
    - `./runtimes/8.0/bin/install.sh`
-   - `./vendor/bin/sail artisan migrate`
+   - `./vendor/bin/sail artisan migrate` (try more time if connection will be refused while mysql starting)
    - use regular `./vendor/bin/sail` commands after first install
 
 How it works:
