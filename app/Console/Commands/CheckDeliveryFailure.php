@@ -34,8 +34,7 @@ class CheckDeliveryFailure extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param  \App\Support\DripEmailer  $drip
+     * 
      * @return mixed
      */
     public function handle()
