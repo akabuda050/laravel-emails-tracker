@@ -5,6 +5,7 @@ if ! [ -x "$(command -v docker)" ]; then
   exit 1
 fi
 
+cp .env.example .env
 docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt  laravelsail/php80-composer:latest composer install --ignore-platform-reqs
 docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt laravelsail/php80-composer:latest php artisan key:generate
 
