@@ -115,7 +115,7 @@ return [
         ],
     ],
     'imap_server' => env('IMAP_SERVER', 'imap.example.net:993/imap/ssl'),
-    'imap_user' => env('MAIL_USERNAME', 'hello@example.com'),
-    'imap_password' => env('MAIL_PASSWORD', 'password'),
+    'imap_user' => env('IMAP_USERNAME', 'hello@example.com'),
+    'imap_password' => env('IMAP_PASSWORD', 'password'),
 
 ];
