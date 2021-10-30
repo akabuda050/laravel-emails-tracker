@@ -20,5 +20,3 @@ docker-compose run --rm --entrypoint "openssl req -x509 -nodes -newkey rsa:$rsa_
     -subj '/CN=$domains'" certbot
 echo
 
-echo "### Reloading nginx ..."
-docker-compose exec nginx nginx -s reload
