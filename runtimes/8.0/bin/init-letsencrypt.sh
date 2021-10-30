@@ -10,7 +10,7 @@ rsa_key_size=4096
 email="" # Adding a valid address is strongly recommended
 staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
-/bin/bash ./init-dummy-certs.sh
+/bin/bash ./runtimes/8.0/bin/init-dummy-certs.sh
 
 echo "### Starting nginx ..."
 docker-compose up --force-recreate -d nginx
