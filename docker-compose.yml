@@ -78,8 +78,6 @@ services:
             - certbot_www:/var/www/certbot
         networks:
             - sail
-        depends_on:
-            - php
     certbot:
         image: certbot/certbot
         volumes:
