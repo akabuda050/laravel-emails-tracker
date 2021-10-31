@@ -20,8 +20,8 @@ if [ ! -f "$runtimePath/conf/cron" ]; then
     cp "$runtimePath/conf/cron.example" "$runtimePath/conf/cron"
 fi
 
-if [ ! -f "$runtimePath/conf/app.conf" ]; then
-    cp "$runtimePath/conf/app.conf.example" "$runtimePath/conf/app.conf"
+if [ ! -f "$runtimePath/conf/nginx/app.conf" ]; then
+    cp "$runtimePath/conf/nginx/app.conf.example" "$runtimePath/conf/nginx/app.conf"
 fi
 
 cp .env.example .env
