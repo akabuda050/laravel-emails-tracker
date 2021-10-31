@@ -4,9 +4,24 @@ if ! [ -x "$(command -v docker)" ]; then
   echo 'Error: docker is not installed.' >&2
   exit 1
 fi
-/bin/bash ./runtimes/8.0/bin/init-dummy-certs.sh
+
+runtimePath="./runtimes/8.0"
+/bin/bash "$runtimePath/bin/init-dummy-certs.sh"
+
+if [ ! -f "$runtimePath/php.ini" ]; then
+    cp "$runtimePath/php.ini.example" "$runtimePath/php.ini"
+fi
+
+if [ ! -f "$runtimePath/supervisord.conf" ]; then
+    cp "$runtimePath/supervisord.conf.example" "$runtimePath/supervisord.conf"
+fi
+
+if [ ! -f "$runtimePath/nginx/app.conf" ]; then
+    cp "$runtimePath/nginx/app.conf.example" "$runtimePath/nginx/app.conf"
+fi
 
 cp .env.example .env
+
 docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt laravelsail/php80-composer:latest composer install --ignore-platform-reqs
 docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt laravelsail/php80-composer:latest php artisan key:generate
 
