@@ -29,8 +29,9 @@ class TrackEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        $this->from('info@redbit.club', 'RedBit Club');
-        $this->subject('Welcome To RedBit Club!');
+        $appName = config('app.name');
+        $this->from(config('mail.from.address'), config('mail.from.name'));
+        $this->subject("Welcome to $appName!");
 
         $this->withSwiftMessage(function ($message) {
             $message->getHeaders()->addTextHeader('X-Model-ID', $this->model->id);
