@@ -8,16 +8,20 @@ fi
 runtimePath="./runtimes/8.0"
 /bin/bash "$runtimePath/bin/init-dummy-certs.sh"
 
-if [ ! -f "$runtimePath/php.ini" ]; then
-    cp "$runtimePath/php.ini.example" "$runtimePath/php.ini"
+if [ ! -f "$runtimePath/conf/php.ini" ]; then
+    cp "$runtimePath/conf/php.ini.example" "$runtimePath/conf/php.ini"
 fi
 
-if [ ! -f "$runtimePath/supervisord.conf" ]; then
-    cp "$runtimePath/supervisord.conf.example" "$runtimePath/supervisord.conf"
+if [ ! -f "$runtimePath/conf/supervisord.conf" ]; then
+    cp "$runtimePath/conf/supervisord.conf.example" "$runtimePath/conf/supervisord.conf"
 fi
 
-if [ ! -f "$runtimePath/nginx/app.conf" ]; then
-    cp "$runtimePath/nginx/app.conf.example" "$runtimePath/nginx/app.conf"
+if [ ! -f "$runtimePath/conf/cron" ]; then
+    cp "$runtimePath/conf/cron.example" "$runtimePath/conf/cron"
+fi
+
+if [ ! -f "$runtimePath/conf/app.conf" ]; then
+    cp "$runtimePath/conf/app.conf.example" "$runtimePath/conf/app.conf"
 fi
 
 cp .env.example .env

@@ -48,15 +48,14 @@ RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
 COPY start-container /usr/local/bin/start-container
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY php.ini /etc/php/8.0/cli/conf.d/99-sail.ini
+COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY conf/php.ini /etc/php/8.0/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
 RUN apt-get update && apt-get install -y cron
-RUN echo "* * * * * /usr/bin/php /var/www/html/artisan schedule:run >> /dev/null 2>&1" >> mycron
-RUN mv mycron /etc/cron.d/mycron
-RUN chmod 0644 /etc/cron.d/mycron &&\
-    crontab /etc/cron.d/mycron
+RUN mv conf/cron /etc/cron.d/app-cron
+RUN chmod 0644 /etc/cron.d/app-cron &&\
+    crontab /etc/cron.d/app-cron
 
 EXPOSE 8000
 

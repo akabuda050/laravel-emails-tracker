@@ -15,5 +15,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/runtimes/8.0/**/*.conf
-/runtimes/8.0/**/*.ini
+/runtimes/8.0/conf/cron
+/runtimes/8.0/conf/*.ini
+/runtimes/8.0/conf/*.conf
+/runtimes/8.0/conf/nginx/*.conf
+

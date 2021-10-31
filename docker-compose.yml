@@ -73,7 +73,7 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ./runtimes/8.0/nginx:/etc/nginx/conf.d
+            - ./runtimes/8.0/conf/nginx:/etc/nginx/conf.d
             - letsencrypt:/etc/letsencrypt
             - certbot_www:/var/www/certbot
         networks:
