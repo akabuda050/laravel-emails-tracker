@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Mail\TrackEmail;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendTrackEmail extends Command
@@ -41,8 +42,13 @@ class SendTrackEmail extends Command
     public function handle()
     {
         $model = User::whereNull('track_email_is_sent')->first();
+        Log::info('-----------SendTrackEmail-----------');
+
         if ($model) {
+            Log::info('-----------TrackEmail-----------');
             Mail::to($model->email)->queue((new TrackEmail($model))->onQueue('emails'));
         }
+
+        Log::info('-----------SendTrackEmail-----------');
     }
 }

@@ -64,7 +64,7 @@ class CheckDeliveryFailure extends Command
 
                 if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
                     Log::info('Start ProcessDeliveryFailure.');
-                    ProcessDeliveryFailure::dispatch($address, $email_number)->onQueue('emails-failure');
+                    ProcessDeliveryFailure::dispatch($address, $email_number)->onQueue('emails-bounced');
                 }
             }
         }

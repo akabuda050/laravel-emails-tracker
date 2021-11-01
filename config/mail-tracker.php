@@ -81,7 +81,7 @@ return [
     /**
      * What queue should we dispatch our tracking jobs to?  Null will use the default queue.
      */
-    'tracker-queue' => null,
+    'tracker-queue' => 'emails',
 
     /**
      * Size limit for content length stored in database
