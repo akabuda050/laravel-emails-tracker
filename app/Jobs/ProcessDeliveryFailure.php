@@ -36,6 +36,7 @@ class ProcessDeliveryFailure implements ShouldQueue
     public function handle()
     {
         Log::info('-----------ProcessDeliveryFailure-----------');
+        Log::info($this->address);
 
         if (filter_var($this->address, FILTER_VALIDATE_EMAIL)) {
             $user = User::where('email', '=', $this->address);

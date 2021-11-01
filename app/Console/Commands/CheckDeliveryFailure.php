@@ -60,7 +60,6 @@ class CheckDeliveryFailure extends Command
                 Log::info($message);
                 preg_match('/Final-recipient: rfc822;(.*)/', $message, $output_array);
                 $address = isset($output_array[1]) ? trim(rtrim($output_array[1])) : '';
-                Log::info($address);
 
                 if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
                     Log::info('Start ProcessDeliveryFailure.');

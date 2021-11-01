@@ -50,10 +50,10 @@ RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 COPY start-container /usr/local/bin/start-container
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY conf/php.ini /etc/php/8.0/cli/conf.d/99-sail.ini
+COPY conf/cron /etc/cron.d/app-cron
 RUN chmod +x /usr/local/bin/start-container
 
 RUN apt-get update && apt-get install -y cron
-RUN mv conf/cron /etc/cron.d/app-cron
 RUN chmod 0644 /etc/cron.d/app-cron &&\
     crontab /etc/cron.d/app-cron
 
