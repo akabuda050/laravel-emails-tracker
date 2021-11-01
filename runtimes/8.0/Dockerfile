@@ -57,6 +57,4 @@ RUN apt-get update && apt-get install -y cron
 RUN chmod 0644 /etc/cron.d/app-cron &&\
     crontab /etc/cron.d/app-cron
 
-EXPOSE 8000
-
 ENTRYPOINT ["start-container"]
