@@ -44,11 +44,11 @@ class ProcessDeliveryFailure implements ShouldQueue
                 $user->email_is_alive = false;
                 $user->delete();
 
-                Log::info('Start MoveDeliveryFailureRecord.');
-                MoveDeliveryFailureRecord::dispatch($this->id);
-
                 Log::info('User marked as deleted.');
             }
+
+            Log::info('Start MoveDeliveryFailureRecord.');
+            MoveDeliveryFailureRecord::dispatch($this->id);
         }
 
         Log::info('-----------ProcessDeliveryFailure-----------');
