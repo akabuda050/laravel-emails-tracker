@@ -36,12 +36,9 @@ class ProcessDeliveryFailure implements ShouldQueue
     public function handle()
     {
         Log::info('-----------ProcessDeliveryFailure-----------');
-        $pattern = '/[a-z0-9_\-\+\.]+@[a-z0-9\-]+\.([a-z]{2,4})(?:\.[a-z]{2})?/i';
-        preg_match_all($pattern, $this->address, $matches);
-        Log::info($matches[0][0]);
 
-        if (filter_var($matches[0][0], FILTER_VALIDATE_EMAIL)) {
-            $user = User::where('email', '=', $matches[0][0]);
+        if (filter_var($this->address, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('email', '=', $this->address);
             if ($user) {
                 Log::info('Start delete processing.');
                 $user->email_is_alive = false;

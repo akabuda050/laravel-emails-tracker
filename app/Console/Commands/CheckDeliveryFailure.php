@@ -57,13 +57,14 @@ class CheckDeliveryFailure extends Command
             /* for every email... */
             foreach ($emails as $email_number) {
                 $message = imap_fetchbody($inbox, $email_number, 2);
-                $pattern = '/[a-z0-9_\-\+\.]+@[a-z0-9\-]+\.([a-z]{2,4})(?:\.[a-z]{2})?/i';
-                preg_match_all($pattern, $message, $matches);
-                Log::info($matches);
+                Log::info($message);
+                preg_match('/Final-recipient: rfc822;(.*)/', $message, $output_array);
+                $address = isset($output_array[1]) ? trim(rtrim($output_array[1])) : '';
+                Log::info($address);
 
-                if (filter_var($matches[0][0], FILTER_VALIDATE_EMAIL)) {
+                if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
                     Log::info('Start ProcessDeliveryFailure.');
-                    ProcessDeliveryFailure::dispatch(trim(rtrim($matches[0][0])), $email_number)->onQueue('emails-failure');
+                    ProcessDeliveryFailure::dispatch($address, $email_number)->onQueue('emails-failure');
                 }
             }
         }

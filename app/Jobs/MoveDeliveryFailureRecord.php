@@ -38,7 +38,15 @@ class MoveDeliveryFailureRecord implements ShouldQueue
         $inbox = imap_open("{{$server}}INBOX", $user, $password) or die('Cannot connect: ' . print_r(imap_errors(), true));
 
         Log::info('Start Moving email');
-        imap_mail_move($inbox, $this->id, 'INBOX.bounced' , 1);
+
+        $status = imap_status($inbox, "{{$server}}INBOX.bounced", SA_ALL);
+        $mailboxIsFound = $status ? true : false;
+        $mailboxName = 'INBOX.bounced';
+        if (!$mailboxIsFound) {
+            imap_createmailbox($inbox, imap_utf7_encode("{{$server}}$mailboxName"));
+        }
+
+        imap_mail_move($inbox, $this->id, $mailboxName);
 
         imap_expunge($inbox);
         imap_close($inbox);
