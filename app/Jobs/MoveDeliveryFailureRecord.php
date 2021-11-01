@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class DeleteDeliveryFailureRecord implements ShouldQueue
+class MoveDeliveryFailureRecord implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,19 +31,19 @@ class DeleteDeliveryFailureRecord implements ShouldQueue
      */
     public function handle()
     {
-        Log::info('-----------DeleteDeliveryFailureRecord-----------');
+        Log::info('-----------MoveDeliveryFailureRecord-----------');
         $server = config('mail.imap_server');
         $user = config('mail.imap_user');
         $password = config('mail.imap_password');
         $inbox = imap_open("{{$server}}INBOX", $user, $password) or die('Cannot connect: ' . print_r(imap_errors(), true));
-        
-        Log::info('Start Delete email');
-        imap_delete($inbox, 1);
+
+        Log::info('Start Moving email');
+        imap_mail_move($inbox, $this->id, 'INBOX.bounced' , 1);
 
         imap_expunge($inbox);
         imap_close($inbox);
-        Log::info('End Delete email');
+        Log::info('End Moving email');
 
-        Log::info('-----------DeleteDeliveryFailureRecord-----------');
+        Log::info('-----------MoveDeliveryFailureRecord-----------');
     }
 }
